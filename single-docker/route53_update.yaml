@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: route53-data-update-${JOB_ID}
+  namespace: ${NAMESPACE}
+spec:
+  template:
+    spec:
+      containers:
+      - name: route53-data-update1
+        image: 953030164212.dkr.ecr.us-east-1.amazonaws.com/glt-route53-dns:latest
+        env:
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: aws-s3-key-id
+              name: s3-bucket-creds
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: aws-s3-secret-key
+              name: s3-bucket-creds
+        - name: REGION
+          value: ${REGION}
+        - name: ZONE_NAME
+          value: ${ZONE_NAME}
+        - name: RECORD_NAME
+          value: ${RECORD_NAME}
+        - name: EC2_TAG_KEY
+          value: ${EC2_TAG_KEY}
+        - name: EC2_TAG_VALUE
+          value: ${EC2_TAG_VALUE}
+      restartPolicy: Never

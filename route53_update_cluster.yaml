@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: route53-data-cluster-${JOB_ID}
+  namespace: ${NAMESPACE}
+spec:
+  template:
+    spec:
+      containers:
+      - name: route53-data-update1
+        image: 953030164212.dkr.ecr.us-east-1.amazonaws.com/glt-route53-dns:newcluster
+        env:
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: aws-s3-key-id
+              name: s3-bucket-creds
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: aws-s3-secret-key
+              name: s3-bucket-creds
+        - name: ROUTE53_REPO
+          value: ${ROUTE53_REPO}
+        - name: ROUTE53_FILE
+          value: ${ROUTE53_FILE}          
+      restartPolicy: Never

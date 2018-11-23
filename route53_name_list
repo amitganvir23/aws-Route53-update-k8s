@@ -1,0 +1,15 @@
+#REGION #ZONE_NAME #RECORD_NAME #EC2_TAG_KEY #EC2_TAG_VALUE
+
+# UAT Couchbase
+us-west-2 glt-uat.com cb-eses.glt-uat.com Name glt-uat-eses-Server*
+us-west-2 glt-uat.com cb-analytics.glt-uat.com Name glt-uat-analytics-Server*
+us-west-2 glt-uat.com cb-kernel.glt-uat.com Name glt-uat-kernel-Server*
+
+# QA Couchbase
+us-west-2 glt-qa.com cb-eses.glt-qa.com Name glt-qa-eses-Server*
+us-west-2 glt-qa.com cb-analytics.glt-qa.com Name glt-qa-analytics-Server*
+us-west-2 glt-qa.com cb-kernel.glt-qa.com Name glt-qa-kernel-Server*
+
+# Test entry
+us-west-1 glt-test.com test5.glt-test.com Couchbase-Cluster glt-test
+us-west-1 glt-test.com test6.glt-test.com Couchbase-Cluster glt-test
